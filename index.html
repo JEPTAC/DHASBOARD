@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tablero de Valor Aplicativos EI</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="splash" class="splash">
+    <div class="splash-card">
+      <div class="splash-mark">EI</div>
+      <h1>Valor que ya está trabajando</h1>
+      <p>Un portafolio interno que reemplaza licencias, ordena procesos y libera tiempo operativo.</p>
+      <button id="enterDashboard">Entrar al tablero</button>
+    </div>
+  </div>
+
+  <div class="page-shell">
+    <aside class="side-panel">
+      <div class="brand-block">
+        <div class="brand-logo">EI</div>
+        <div>
+          <span>Electro Ingeniería</span>
+          <strong>Valor económico de aplicativos</strong>
+        </div>
+      </div>
+
+      <nav class="nav-stack">
+        <a href="#resumen" class="active"><i class="fa-solid fa-gauge-high"></i> Resumen</a>
+        <a href="#comparativo"><i class="fa-solid fa-table-list"></i> Comparativo</a>
+        <a href="#competencias"><i class="fa-solid fa-ranking-star"></i> Top 3 mercado</a>
+        <a href="#formulas"><i class="fa-solid fa-square-root-variable"></i> Fórmulas</a>
+        <a href="#fuentes"><i class="fa-solid fa-link"></i> Fuentes</a>
+      </nav>
+
+      <div class="method-card">
+        <span>Método usado</span>
+        <p>El sueldo no se carga completo a cada app. Se imputa por dedicación, complejidad y sostenimiento real del portafolio.</p>
+      </div>
+    </aside>
+
+    <main class="dashboard">
+      <section id="resumen" class="hero-section panel-glass">
+        <div class="hero-copy">
+          <span class="eyebrow">Portafolio interno de aplicaciones</span>
+          <h1>Un desarrollo propio que evita compras, baja fricción y deja trazabilidad donde antes había dispersión.</h1>
+          <p>El hito no está en decir que una app interna reemplaza a un gigante del mercado. El hito está en haber construido herramientas ajustadas al proceso real, sin licenciamiento por usuario, sin implantaciones largas y con control sobre la forma como trabaja la empresa.</p>
+          <div class="hero-actions">
+            <button id="refreshModel" class="primary-action"><i class="fa-solid fa-rotate"></i> Recalcular tablero</button>
+            <button id="printBoard" class="secondary-action"><i class="fa-solid fa-print"></i> Exportar vista</button>
+          </div>
+        </div>
+        <div class="hero-metrics">
+          <div class="metric-card main-metric">
+            <span>Valor anual ajustado</span>
+            <strong id="kpiAnnualValue">$0</strong>
+            <small>Mercado evitado + ahorro operativo + mantenimiento evitado</small>
+          </div>
+          <div class="metric-grid">
+            <div class="metric-card">
+              <span>Costo imputado anual</span>
+              <strong id="kpiAnnualCost">$0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Neto anual</span>
+              <strong id="kpiNetAnnual">$0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Retorno</span>
+              <strong id="kpiRoi">0x</strong>
+            </div>
+            <div class="metric-card">
+              <span>TRM usada</span>
+              <strong id="kpiTrm">$0</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="insight-strip">
+        <div>
+          <i class="fa-solid fa-file-circle-check"></i>
+          <strong>Menos papel</strong>
+          <span>Registros, formatos, auditorías y solicitudes se concentran en flujo digital.</span>
+        </div>
+        <div>
+          <i class="fa-solid fa-clock"></i>
+          <strong>Menos horas perdidas</strong>
+          <span>La consulta, seguimiento y respuesta dejan de depender de correos sueltos.</span>
+        </div>
+        <div>
+          <i class="fa-solid fa-shield-halved"></i>
+          <strong>Más control</strong>
+          <span>Radicados, trazabilidad, roles y evidencias reducen reprocesos y omisiones.</span>
+        </div>
+        <div>
+          <i class="fa-solid fa-seedling"></i>
+          <strong>Crecimiento propio</strong>
+          <span>La empresa conserva conocimiento, criterio técnico y capacidad de adaptación.</span>
+        </div>
+      </section>
+
+      <section class="chart-section">
+        <div class="chart-card panel-glass">
+          <div class="section-head compact">
+            <div>
+              <span class="eyebrow">Composición del valor</span>
+              <h2>Qué aporta cada app al portafolio</h2>
+            </div>
+          </div>
+          <canvas id="valueChart" height="120"></canvas>
+        </div>
+        <div class="chart-card panel-glass">
+          <div class="section-head compact">
+            <div>
+              <span class="eyebrow">Valor vs inversión</span>
+              <h2>Mercado y ahorro frente al costo imputado</h2>
+            </div>
+          </div>
+          <canvas id="roiChart" height="120"></canvas>
+        </div>
+      </section>
+
+      <section id="comparativo" class="panel-glass table-panel">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Tabla explicativa</span>
+            <h2>Comparativo directo por aplicación</h2>
+            <p>Los campos de analista, sueldo y dedicación se pueden editar. El tablero recalcula costo imputado, ahorro neto y retorno.</p>
+          </div>
+          <div class="filter-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="searchInput" type="search" placeholder="Buscar app o proceso">
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="appsTable">
+            <thead>
+              <tr>
+                <th>Aplicación</th>
+                <th>Analista involucrado</th>
+                <th>Sueldo mensual</th>
+                <th>Dedicación</th>
+                <th>Mercado mensual</th>
+                <th>Ahorro operativo</th>
+                <th>Costo imputado</th>
+                <th>Neto mensual</th>
+                <th>Retorno</th>
+                <th>Detalle</th>
+              </tr>
+            </thead>
+            <tbody id="appsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="competencias" class="panel-glass">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Top 3 por app</span>
+            <h2>Competidores usados como referencia</h2>
+            <p>Se priorizan precios públicos. Cuando un proveedor trabaja por cotización, se deja señalado y no se fuerza un valor inventado.</p>
+          </div>
+          <select id="appSelector"></select>
+        </div>
+        <div id="competitorCards" class="competitor-grid"></div>
+      </section>
+
+      <section class="apps-grid" id="appCards"></section>
+
+      <section id="formulas" class="panel-glass formulas-panel">
+        <div class="section-head compact">
+          <div>
+            <span class="eyebrow">Base del cálculo</span>
+            <h2>Fórmulas del tablero</h2>
+          </div>
+        </div>
+        <div class="formula-grid">
+          <div><strong>Costo imputado mensual</strong><span>Sueldo mensual × dedicación estimada</span></div>
+          <div><strong>Valor mensual de la app</strong><span>Mercado mensual + ahorro operativo + mantenimiento evitado</span></div>
+          <div><strong>Ahorro neto mensual</strong><span>Valor mensual de la app − costo imputado mensual</span></div>
+          <div><strong>Retorno</strong><span>Valor mensual de la app ÷ costo imputado mensual</span></div>
+          <div><strong>Valor anual</strong><span>Valor mensual de la app × 12</span></div>
+          <div><strong>Valores de construcción</strong><span>Cuando el mercado cobra desarrollo único, se mensualiza en 12 meses</span></div>
+        </div>
+      </section>
+
+      <section id="fuentes" class="panel-glass sources-panel">
+        <div class="section-head compact">
+          <div>
+            <span class="eyebrow">Referencias</span>
+            <h2>Fuentes de precio y conversión</h2>
+          </div>
+        </div>
+        <div id="sourcesList" class="sources-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="detailModal" class="modal-shell">
+    <div class="modal-card">
+      <button id="closeModal" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Tablero recalculado</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
