@@ -3,144 +3,148 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tablero económico de aplicativos EI</title>
+  <title>Valor económico del portafolio digital EI</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="splash" class="splash">
-    <div class="pulse-mark"></div>
-    <strong>Electro Ingeniería</strong>
-    <span>Valor económico del portafolio digital interno</span>
+  <div id="intro" class="intro">
+    <div class="intro-card">
+      <span></span>
+      <strong>Electro Ingeniería</strong>
+      <p>Portafolio digital interno</p>
+    </div>
   </div>
 
-  <main class="shell">
-    <section class="hero card">
-      <div class="hero-copy">
-        <span class="step">1. Lectura central</span>
-        <h1>Comprar el software completo cuesta más que sostener a los analistas que lo construyen y lo adaptan.</h1>
-        <p>El cálculo compara cada aplicativo interno contra tres alternativas de mercado, usando 20 usuarios, licencia mensual y costo de creación o personalización prorrateado a 12 meses.</p>
-      </div>
-      <div class="hero-kpis" id="heroKpis"></div>
-      <button id="openMethod" class="link-btn">Ver método de cálculo</button>
-    </section>
-
-    <section class="analyst-zone">
-      <div class="section-title">
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">EI</div>
         <div>
-          <span class="step">2. Rentabilidad por analista</span>
-          <h2>Un sueldo cubre varias aplicaciones</h2>
-        </div>
-        <div class="global-box">
-          <label>Usuarios comparados<input id="usersInput" type="number" min="1" value="20"></label>
+          <strong>Valor económico del portafolio digital</strong>
+          <small>Comparación de mercado para 20 usuarios · primer año equivalente</small>
         </div>
       </div>
-      <div id="analystCards" class="analyst-cards"></div>
-    </section>
+      <nav class="nav-actions">
+        <button data-panel="resumen" class="nav-btn active">Resumen</button>
+        <button data-panel="analistas" class="nav-btn">Analistas</button>
+        <button data-panel="apps" class="nav-btn">Apps</button>
+        <button id="openMethod" class="ghost-btn">Método</button>
+      </nav>
+    </header>
 
-    <section class="stage card">
-      <div class="stage-head">
-        <div>
-          <span class="step">3. Aplicativo en foco</span>
-          <h2 id="appName">Aplicativo</h2>
-          <p id="appPurpose">Seleccione un aplicativo para concentrar la explicación.</p>
-        </div>
-        <div class="stage-actions">
-          <button id="prevApp" class="ghost-btn">Anterior</button>
-          <button id="nextApp" class="primary-btn">Siguiente</button>
-        </div>
+    <section id="panel-resumen" class="panel active">
+      <div class="summary-grid">
+        <article class="story-card">
+          <span class="eyebrow">Lectura para exposición</span>
+          <h1>El equipo interno sostiene un portafolio que en el mercado exige licencias, configuración y personalización por separado.</h1>
+          <p>La comparación no toma solo la mensualidad de un software. Suma el uso para 20 usuarios y la creación o parametrización que normalmente se cobra al implementar una solución equivalente.</p>
+          <div class="story-actions">
+            <button id="goApps" class="primary-btn">Explorar app por app</button>
+            <button id="goAnalysts" class="ghost-btn">Ver ahorro por analista</button>
+          </div>
+        </article>
+        <article class="main-metric-card">
+          <span>Ahorro mensual estimado</span>
+          <strong id="mainSaving">$0</strong>
+          <p id="mainSavingText">Mercado completo menos costo EI interno.</p>
+          <div class="metric-strip" id="metricStrip"></div>
+        </article>
       </div>
 
-      <div class="app-selector" id="appSelector"></div>
-
-      <div class="focus-layout">
-        <section class="focus-summary">
-          <div class="owner-card">
-            <span>Analista responsable</span>
-            <strong id="ownerName">Analista</strong>
-            <small id="ownerCost">Costo mensual por app</small>
-          </div>
-          <div class="app-kpis" id="appKpis"></div>
-          <div class="value-box">
-            <span>Por qué gana EI</span>
-            <p id="winText"></p>
-          </div>
-          <button id="openDetail" class="primary-btn full">Abrir detalle, fuentes y edición</button>
-        </section>
-
-        <section class="chart-panel">
-          <div class="chart-title">
+      <div class="visual-row">
+        <article class="chart-card big">
+          <div class="card-head">
             <div>
-              <span>Top 3 competencias</span>
-              <strong>Mensual equivalente para 20 usuarios</strong>
+              <span class="eyebrow">Comparación general</span>
+              <h2>Mercado vs equipo interno</h2>
             </div>
-            <b id="chartSaving">Ahorro</b>
+            <button id="openTotals" class="mini-btn">Detalle</button>
           </div>
-          <div id="bars" class="bars"></div>
-        </section>
+          <div id="generalBars" class="general-bars"></div>
+        </article>
+        <article class="chart-card compact">
+          <div class="card-head">
+            <div>
+              <span class="eyebrow">Composición</span>
+              <h2>Qué se evita pagar</h2>
+            </div>
+          </div>
+          <div id="mixChart" class="mix-chart"></div>
+        </article>
       </div>
+    </section>
 
-      <div class="compact-table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Concepto</th>
-              <th>Mercado</th>
-              <th>EI</th>
-              <th>Resultado</th>
-            </tr>
-          </thead>
-          <tbody id="summaryRows"></tbody>
-        </table>
+    <section id="panel-analistas" class="panel">
+      <div class="panel-title">
+        <div>
+          <span class="eyebrow">Rentabilidad por analista</span>
+          <h2>Un sueldo cubre varias soluciones internas</h2>
+        </div>
+        <p>Seleccione un analista para ver las aplicaciones a cargo y la diferencia frente al mercado.</p>
+      </div>
+      <div id="analystBoard" class="analyst-board"></div>
+    </section>
+
+    <section id="panel-apps" class="panel">
+      <div class="app-layout">
+        <aside class="app-menu">
+          <div class="menu-title">
+            <span class="eyebrow">Portafolio</span>
+            <h2>Aplicaciones</h2>
+          </div>
+          <div id="appList" class="app-list"></div>
+        </aside>
+        <article class="app-stage">
+          <div class="stage-top">
+            <div>
+              <span id="appOwner" class="eyebrow">Analista</span>
+              <h2 id="appTitle">Aplicación</h2>
+              <p id="appPurpose">Seleccione una app para iniciar.</p>
+            </div>
+            <div class="stage-buttons">
+              <button id="prevApp" class="ghost-btn">Anterior</button>
+              <button id="nextApp" class="primary-btn">Siguiente</button>
+            </div>
+          </div>
+
+          <div class="focus-grid">
+            <section class="focus-chart-card">
+              <div class="card-head tight">
+                <div>
+                  <span class="eyebrow">Top 3 competencias</span>
+                  <h3>Valor mensual completo para 20 usuarios</h3>
+                </div>
+                <button id="openAppDetail" class="mini-btn">Ver detalle</button>
+              </div>
+              <div id="appBars" class="app-bars"></div>
+            </section>
+            <section class="focus-side">
+              <div class="mini-metrics" id="appMetrics"></div>
+              <div class="reason-box">
+                <span>Por qué gana EI</span>
+                <p id="appReason"></p>
+              </div>
+              <div class="quick-row">
+                <button id="openCompetitors" class="ghost-btn">Competencias</button>
+                <button id="openEdit" class="ghost-btn">Editar datos</button>
+              </div>
+            </section>
+          </div>
+        </article>
       </div>
     </section>
   </main>
 
-  <dialog id="detailDialog" class="modal">
-    <div class="modal-head">
-      <div>
-        <span class="step">Detalle editable</span>
-        <h3 id="detailName">Aplicativo</h3>
+  <dialog id="modal" class="modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div>
+          <span id="modalEyebrow" class="eyebrow">Detalle</span>
+          <h3 id="modalTitle">Título</h3>
+        </div>
+        <button id="closeModal" class="close-btn">×</button>
       </div>
-      <button id="closeDetail" class="icon-btn">×</button>
-    </div>
-    <div class="modal-body">
-      <div class="edit-grid">
-        <label>Analista<input id="editAnalyst" type="text"></label>
-        <label>Sueldo mensual<input id="editSalary" type="number" min="0" step="50000"></label>
-        <label>Creación mercado<input id="editBuildMarket" type="number" min="0" step="100000"></label>
-        <label>Creación EI<input id="editBuildEi" type="number" min="0" step="100000"></label>
-      </div>
-      <div class="modal-grid">
-        <section>
-          <h4>Competencias usadas</h4>
-          <div id="competitorRows" class="competitor-rows"></div>
-        </section>
-        <section>
-          <h4>Aporte operativo</h4>
-          <ul id="impactRows" class="impact-list"></ul>
-          <div class="formula-box" id="formulaText"></div>
-        </section>
-      </div>
-      <section class="sources">
-        <h4>Fuentes de referencia</h4>
-        <div id="sourceRows"></div>
-      </section>
-    </div>
-  </dialog>
-
-  <dialog id="methodDialog" class="modal method-modal">
-    <div class="modal-head">
-      <div>
-        <span class="step">Método</span>
-        <h3>Cómo se calcula el ahorro</h3>
-      </div>
-      <button id="closeMethod" class="icon-btn">×</button>
-    </div>
-    <div class="method-body">
-      <article><b>1. Mercado mensual</b><p>Se calcula el promedio de tres competidores con 20 usuarios. Si el proveedor cobra por usuario, se multiplica por 20. Si cobra plan fijo, se toma el plan mensual publicado o la referencia comercial usada.</p></article>
-      <article><b>2. Creación y personalización</b><p>El costo de creación de mercado se divide en 12 meses para representar implementación, parametrización, ajustes, pruebas, despliegue y acompañamiento inicial.</p></article>
-      <article><b>3. Costo EI por aplicativo</b><p>El sueldo mensual del analista se distribuye entre la cantidad de aplicaciones que tiene a cargo. Así se evita inflar o castigar una app por separado.</p></article>
-      <article><b>4. Ahorro mensual</b><p>Ahorro = mercado mensual equivalente + creación mensualizada - costo EI por aplicativo. El resultado muestra cuánto evita pagar la empresa por mantener el conocimiento dentro del equipo.</p></article>
+      <div id="modalBody" class="modal-body"></div>
     </div>
   </dialog>
 
