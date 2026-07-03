@@ -1,469 +1,333 @@
 const TRM = 3357.82;
-const userPlanValue = 2134000;
-const usd = value => Math.round(value * TRM);
-const annualToMonthlyUsd = value => usd(value / 12);
-const eur = value => Math.round(value * 3650);
-
+const state = {
+  active: 0,
+  globalUsers: 20,
+  analystCount: 3,
+  baseSalary: 2100000
+};
 const apps = [
   {
     id: "calidad",
-    icon: "fa-folder-tree",
+    tag: "Repositorio y calidad",
     name: "Página de calidad",
-    type: "Repositorio documental y comunicaciones",
-    analyst: "Analista de calidad",
-    salary: 2100000,
-    dedication: 28,
-    marketMonthly: Math.round((usd(80) + usd(12.5 * 10) + usd(200)) / 3),
-    operatingSavings: 520000,
-    maintenanceAvoided: 140000,
-    features: ["Repositorio documental", "Noticias internas", "Auditorías", "Acceso a aplicativos", "Información centralizada", "Búsqueda y consulta rápida"],
-    why: "Organiza el conocimiento del proceso de calidad en un punto único, baja la dependencia de carpetas sueltas y reduce solicitudes repetidas de documentos.",
+    analyst: "Analista por definir",
+    weight: 8,
+    buildMarket: 10500000,
+    summary: "Centraliza documentos, noticias, auditorías, accesos a aplicaciones e información del proceso. Su valor no está en ser una página, sino en ordenar el conocimiento operativo y reducir búsqueda, dispersión y reprocesos.",
+    verdict: "EI gana por control documental interno sin pagar una suite pesada.",
+    impacts: ["Menos búsqueda de documentos y enlaces", "Menos solicitudes repetidas por ubicación de información", "Mayor trazabilidad de noticias, auditorías y repositorios", "Punto único para información del proceso"],
     competitors: [
-      { name: "Archbee", plan: "Portal desde USD 80/mes", monthlyCop: usd(80), basis: "Portal de conocimiento con lectores ilimitados", source: "https://www.archbee.com/pricing" },
-      { name: "Slab", plan: "Business USD 12,50 usuario/mes × 10", monthlyCop: usd(12.5 * 10), basis: "Base de conocimiento por usuario", source: "https://slab.com/pricing/" },
-      { name: "Helpjuice", plan: "Run-Up USD 200/mes", monthlyCop: usd(200), basis: "Knowledge base con colaboración y control", source: "https://helpjuice.com/pricing" }
+      {name:"Helpjuice Knowledge Base", usd:249, type:"flat", source:"https://helpjuice.com/pricing"},
+      {name:"Slab Business", usd:12.5, type:"per_user", source:"https://slab.com/pricing/"},
+      {name:"Archbee documentación", usd:80, type:"flat", source:"https://www.archbee.com/pricing"}
     ]
   },
   {
-    id: "logistica",
-    icon: "fa-route",
-    name: "ERP trazabilidad logística",
-    type: "Flujo de pedidos, roles y estados",
-    analyst: "Analista logístico / calidad",
-    salary: 2100000,
-    dedication: 58,
-    marketMonthly: Math.round((usd(55 * 15) + usd(49 * 10) + usd(249)) / 3),
-    operatingSavings: 2100000,
-    maintenanceAvoided: 420000,
-    features: ["Ventas", "Caja", "Logística", "Corte de cable", "Alistamiento", "Facturación", "Recepción", "Reportes"],
-    why: "Conecta áreas que antes podían trabajar por mensajes, formatos y validaciones manuales. El valor real está en la trazabilidad y en la disminución del reproceso operativo.",
+    id: "trazabilidad",
+    tag: "Operación logística",
+    name: "ERP de trazabilidad logística",
+    analyst: "Analista por definir",
+    weight: 22,
+    buildMarket: 42000000,
+    summary: "Controla el recorrido del pedido, responsables, estados, evidencias, tiempos, reportes y alertas. Es el núcleo operativo del portafolio y por eso carga el mayor peso técnico.",
+    verdict: "EI evita comprar una plataforma de operación y además la ajusta al proceso real.",
+    impacts: ["Reducción de seguimiento por WhatsApp y llamadas", "Menos pérdida de trazabilidad entre áreas", "Evidencia por etapa del pedido", "Mayor control de tiempos y cuellos de botella"],
     competitors: [
-      { name: "Quickbase", plan: "Business USD 55 usuario/mes × 15", monthlyCop: usd(55 * 15), basis: "Plataforma de procesos y aplicaciones internas", source: "https://www.quickbase.com/plans-and-pricing" },
-      { name: "Odoo", plan: "Referencia cloud USD 49 usuario/mes × 10", monthlyCop: usd(49 * 10), basis: "ERP modular con apps integradas", source: "https://www.odoo.com/pricing-configurator" },
-      { name: "Zoho Inventory", plan: "Enterprise USD 249/mes", monthlyCop: usd(249), basis: "Inventario y órdenes con límites por plan", source: "https://www.zoho.com/inventory/pricing/" }
+      {name:"Quickbase Business", usd:55, type:"per_user", source:"https://www.quickbase.com/plans-and-pricing"},
+      {name:"Odoo Custom", usd:61, type:"per_user", source:"https://www.odoo.com/pricing"},
+      {name:"Odoo Standard", usd:31.1, type:"per_user", source:"https://www.odoo.com/pricing"}
     ]
   },
   {
     id: "aula",
-    icon: "fa-graduation-cap",
+    tag: "Capacitación interna",
     name: "Aula EI",
-    type: "Capacitación, evaluación y certificados",
-    analyst: "Analista de formación",
-    salary: 2100000,
-    dedication: 35,
-    marketMonthly: Math.round((annualToMonthlyUsd(1180) + usd(109) + usd(249)) / 3),
-    operatingSavings: 850000,
-    maintenanceAvoided: 140000,
-    features: ["Cursos", "Evaluaciones", "Certificados", "Ranking", "Recursos", "Asignaciones", "Seguimiento"],
-    why: "Convierte capacitaciones internas en rutas medibles, evita dispersión de evidencias y permite demostrar cumplimiento con datos de avance.",
+    analyst: "Analista por definir",
+    weight: 12,
+    buildMarket: 26000000,
+    summary: "Organiza capacitaciones, módulos, evaluaciones, evidencias, certificados y seguimiento. Convierte la formación interna en una ruta medible y repetible.",
+    verdict: "EI convierte la capacitación en activo interno, no en sesiones sueltas.",
+    impacts: ["Menos jornadas repetitivas de inducción", "Certificados y evidencias centralizadas", "Evaluación controlada por módulo", "Seguimiento claro del avance de los participantes"],
     competitors: [
-      { name: "MoodleCloud", plan: "Medium USD 1.180/año", monthlyCop: annualToMonthlyUsd(1180), basis: "LMS administrado con usuarios y almacenamiento definidos", source: "https://www.moodlecloud.com/standard-plans/" },
-      { name: "TalentLMS", plan: "Grow USD 109/mes", monthlyCop: usd(109), basis: "LMS para equipos con ramas y cursos ilimitados", source: "https://www.talentlms.com/prices" },
-      { name: "LearnWorlds", plan: "Learning Center USD 249/mes", monthlyCop: usd(249), basis: "Plataforma de cursos con automatizaciones y reportes", source: "https://www.learnworlds.com/pricing/" }
+      {name:"TalentLMS Core", usd:119, type:"flat", source:"https://www.talentlms.com/prices"},
+      {name:"LearnWorlds Learning Center", usd:249, type:"flat", source:"https://www.learnworlds.com/pricing/"},
+      {name:"MoodleCloud Starter", usd:13.33, type:"flat", source:"https://www.moodlecloud.com/standard-plans/"}
     ]
   },
   {
     id: "mesa",
-    icon: "fa-headset",
+    tag: "Soporte y radicados",
     name: "Mesa de ayuda de calidad",
-    type: "Tickets, radicados y seguimiento",
-    analyst: "Analista de calidad",
-    salary: 2100000,
-    dedication: 34,
-    marketMonthly: Math.round((usd(55 * 3) + usd(19 * 3) + usd(25 * 3)) / 3),
-    operatingSavings: 1300000,
-    maintenanceAvoided: 160000,
-    features: ["Radicados", "Asignación", "Anexos", "Consulta", "Tiempos", "Estados", "Indicadores"],
-    why: "Le da orden formal a solicitudes que antes podían resolverse sin trazabilidad suficiente. El beneficio se ve en tiempos, responsables y evidencia de cierre.",
+    analyst: "Analista por definir",
+    weight: 10,
+    buildMarket: 18000000,
+    summary: "Recibe solicitudes, genera radicados, asigna responsables, mide tiempos y consolida indicadores. Evita que el soporte del proceso quede repartido en conversaciones y correos.",
+    verdict: "EI estructura la atención interna con bajo costo y trazabilidad real.",
+    impacts: ["Control de solicitudes por radicado", "Asignación visible de responsables", "Indicadores de tiempos y cargas", "Menos pérdida de solicitudes por canales informales"],
     competitors: [
-      { name: "Freshdesk", plan: "Pro USD 55 agente/mes × 3", monthlyCop: usd(55 * 3), basis: "Mesa de ayuda con portales y reportes", source: "https://www.freshworks.com/freshdesk/pricing/" },
-      { name: "Zendesk", plan: "Desde USD 19 agente/mes × 3", monthlyCop: usd(19 * 3), basis: "Suite de atención con precio por agente", source: "https://www.zendesk.com/pricing/" },
-      { name: "Help Scout", plan: "Standard USD 25 usuario/mes × 3", monthlyCop: usd(25 * 3), basis: "Soporte por bandejas, docs y flujos", source: "https://www.helpscout.com/pricing/" }
+      {name:"Zendesk Suite Team", usd:55, type:"per_user", source:"https://www.zendesk.com/pricing/"},
+      {name:"Freshdesk Pro", usd:55, type:"per_user", source:"https://www.freshworks.com/freshdesk/pricing/"},
+      {name:"Help Scout Plus", usd:50, type:"per_user", source:"https://www.helpscout.com/pricing/"}
     ]
   },
   {
     id: "inventario",
-    icon: "fa-boxes-stacked",
-    name: "APP inventario cíclico",
-    type: "Conteos, ajustes y control físico",
-    analyst: "Analista de inventarios",
-    salary: 2100000,
-    dedication: 43,
-    marketMonthly: Math.round((usd(129) + usd(149) + usd(186)) / 3),
-    operatingSavings: 1600000,
-    maintenanceAvoided: 210000,
-    features: ["Conteo cíclico", "Ubicaciones", "Diferencias", "Evidencias", "Reportes", "Histórico"],
-    why: "Reduce el esfuerzo de consolidar conteos manuales y mejora la lectura de diferencias antes de que se conviertan en reproceso o pérdida de control.",
+    tag: "Inventario físico",
+    name: "APP de inventario cíclico",
+    analyst: "Analista por definir",
+    weight: 9,
+    buildMarket: 20500000,
+    summary: "Permite registrar conteos, evidencias, diferencias, responsables y cierres de inventario. Su aporte está en disminuir errores manuales y mejorar disciplina de control físico.",
+    verdict: "EI conserva control de inventario sin depender de paquetes sobredimensionados.",
+    impacts: ["Menos papel en conteos físicos", "Menos digitación posterior en Excel", "Evidencia y responsable por conteo", "Mejor control de diferencias y cierres"],
     competitors: [
-      { name: "Zoho Inventory", plan: "Plus USD 129/mes", monthlyCop: usd(129), basis: "Inventario, ubicaciones y órdenes", source: "https://www.zoho.com/inventory/pricing/" },
-      { name: "Sortly", plan: "Ultra USD 149/mes", monthlyCop: usd(149), basis: "Inventario visual con usuarios y límites", source: "https://www.sortly.com/pricing/" },
-      { name: "inFlow", plan: "Entrepreneur USD 186/mes", monthlyCop: usd(186), basis: "Inventario cloud para equipos pequeños", source: "https://www.inflowinventory.com/software-pricing" }
+      {name:"inFlow Mid-Size", usd:999, type:"flat", source:"https://www.softwareadvice.com/scm/inflow-inventory-profile/"},
+      {name:"Sortly Premium", usd:299, type:"flat", source:"https://www.sortly.com/pricing/"},
+      {name:"Zoho Inventory 20 usuarios", usd:256.5, type:"flat", source:"https://www.zoho.com/inventory/pricing/"}
     ]
   },
   {
-    id: "compras",
-    icon: "fa-cart-shopping",
+    id: "requisicion",
+    tag: "Compras y aprobaciones",
     name: "Requisición de compras",
-    type: "Solicitudes, aprobaciones y compras",
-    analyst: "Analista de compras / calidad",
-    salary: 2100000,
-    dedication: 40,
-    marketMonthly: Math.round((usd(499) + usd(225) + usd(425)) / 3),
-    operatingSavings: 1200000,
-    maintenanceAvoided: 220000,
-    features: ["Requisiciones", "Aprobaciones", "Trazabilidad", "Estados", "Adjuntos", "Historial"],
-    why: "Ordena una etapa sensible del gasto, deja evidencia de quién solicita, quién aprueba y en qué estado queda cada compra.",
+    analyst: "Analista por definir",
+    weight: 12,
+    buildMarket: 28000000,
+    summary: "Ordena solicitudes de compra, aprobaciones, responsables, soportes y trazabilidad. El ahorro surge de controlar el flujo antes de comprar y no después del problema.",
+    verdict: "EI instala disciplina de compras sin contratar un procure-to-pay externo.",
+    impacts: ["Menos aprobaciones informales", "Soportes completos antes de comprar", "Trazabilidad de solicitante y responsable", "Mejor control del gasto operativo"],
     competitors: [
-      { name: "Precoro", plan: "Core USD 499/mes", monthlyCop: usd(499), basis: "Compras, aprobaciones y control de proveedores", source: "https://precoro.com/pricing" },
-      { name: "Tradogram", plan: "Pro USD 225/mes", monthlyCop: usd(225), basis: "Procurement con solicitudes, órdenes y proveedores", source: "https://www.tradogram.com/pricing" },
-      { name: "Tradogram Premium", plan: "USD 425/mes", monthlyCop: usd(425), basis: "Nivel superior para flujos de compras", source: "https://www.tradogram.com/pricing" }
+      {name:"Precoro Automation", usd:999, type:"flat", source:"https://precoro.com/pricing"},
+      {name:"Tradogram Premium", usd:425, type:"flat", source:"https://www.tradogram.com/pricing"},
+      {name:"Procurify referencia contrato", usd:1250, type:"flat", source:"https://www.procurify.com/pricing/"}
     ]
   },
   {
     id: "cartera",
-    icon: "fa-money-check-dollar",
+    tag: "Cartera y seguimiento",
     name: "Gestión de cartera",
-    type: "Seguimiento de cobro y clientes",
-    analyst: "Analista financiero / calidad",
-    salary: 2100000,
-    dedication: 45,
-    marketMonthly: Math.round((usd(249) + usd(499) + usd(99)) / 3),
-    operatingSavings: 1650000,
-    maintenanceAvoided: 210000,
-    features: ["Clientes", "Seguimientos", "Compromisos", "Alertas", "Estados", "Reportes"],
-    why: "Permite que cartera deje de depender solo de recordatorios manuales. El valor está en priorizar, registrar compromisos y sostener seguimiento.",
+    analyst: "Analista por definir",
+    weight: 10,
+    buildMarket: 22000000,
+    summary: "Organiza clientes, estados, seguimiento, compromisos y alertas. Su aporte está en hacer visible la cartera y reducir gestión dispersa.",
+    verdict: "EI mejora control y seguimiento sin depender de un sistema de cobranza contratado.",
+    impacts: ["Seguimiento de compromisos de pago", "Priorización de cartera por estado", "Menos llamadas y recordatorios sin registro", "Visibilidad para responsables y coordinación"],
     competitors: [
-      { name: "Moonflow", plan: "Essential USD 249/mes", monthlyCop: usd(249), basis: "Cobranzas con usuarios ilimitados y onboarding asistido", source: "https://www.moonflow.ai/en/solutions/commercial-collections" },
-      { name: "Moonflow Premium", plan: "USD 499/mes", monthlyCop: usd(499), basis: "Conexión API y soporte ampliado", source: "https://www.moonflow.ai/en/solutions/commercial-collections" },
-      { name: "Dapta", plan: "Pro USD 99/mes", monthlyCop: usd(99), basis: "Agentes y flujos automatizados", source: "https://dapta.ai/es/pricing/" }
+      {name:"Moonflow Premium", usd:499, type:"flat", source:"https://www.moonflow.ai/en/solutions/commercial-collections"},
+      {name:"Debitia referencia mercado", usd:499, type:"flat", source:"https://debitia.com/"},
+      {name:"Dapta referencia mercado", usd:499, type:"flat", source:"https://dapta.ai/cobranzas/"}
     ]
   },
   {
     id: "auditoria",
-    icon: "fa-clipboard-check",
-    name: "ERP auditoría procesos logísticos",
-    type: "Auditoría, hallazgos y planes de acción",
-    analyst: "Analista auditoría logística",
-    salary: 2100000,
-    dedication: 42,
-    marketMonthly: Math.round((usd(24 * 10) + usd(12 * 10) + eur(16 * 10)) / 3),
-    operatingSavings: 1700000,
-    maintenanceAvoided: 220000,
-    features: ["Checklists", "Hallazgos", "Evidencias", "Planes de acción", "Responsables", "Reportes"],
-    why: "Digitaliza auditorías de proceso y permite cerrar hallazgos con responsables, evidencias y seguimiento, sin depender de actas aisladas.",
+    tag: "Auditoría logística",
+    name: "ERP de auditoría de procesos logísticos",
+    analyst: "Analista por definir",
+    weight: 10,
+    buildMarket: 24000000,
+    summary: "Estandariza auditorías, listas de chequeo, evidencias, hallazgos, responsables y acciones. Aporta control operativo y evita informes manuales desordenados.",
+    verdict: "EI convierte la auditoría en seguimiento vivo, no en actas sueltas.",
+    impacts: ["Checklists estandarizados", "Fotos y hallazgos asociados al punto auditado", "Acciones y responsables visibles", "Menos informes manuales repetitivos"],
     competitors: [
-      { name: "SafetyCulture", plan: "Premium USD 24 asiento/mes × 10", monthlyCop: usd(24 * 10), basis: "Auditorías, inspecciones y operaciones", source: "https://safetyculture.com/pricing" },
-      { name: "GoAudits", plan: "Starter USD 12 usuario/mes × 10", monthlyCop: usd(12 * 10), basis: "Inspecciones móviles y reportes automáticos", source: "https://www.capterra.com/p/191777/GoAudits/" },
-      { name: "Lumiform", plan: "Professional EUR 16 usuario/mes × 10", monthlyCop: eur(16 * 10), basis: "Checklists, reportes y permisos", source: "https://lumiformapp.com/pricing" }
+      {name:"SafetyCulture Premium", usd:24, type:"per_user", source:"https://safetyculture.com/pricing"},
+      {name:"GoAudits Enterprise", usd:30, type:"per_user", source:"https://goaudits.com/pricing/"},
+      {name:"Lumiform Professional", usd:22, type:"per_user", source:"https://www.g2.com/products/zyp-one-gmbh-lumiform/pricing"}
     ]
   },
   {
-    id: "pagina-general",
-    icon: "fa-globe",
-    name: "Página general EI",
-    type: "Información, asesores y catálogo",
-    analyst: "Analista de información",
-    salary: 2100000,
-    dedication: 15,
-    marketMonthly: Math.round((userPlanValue / 12) + ((usd(25) + usd(39) + usd(23)) / 3)),
-    operatingSavings: 800000,
-    maintenanceAvoided: 120000,
-    buildValue: userPlanValue,
-    features: ["Información corporativa", "Acceso a asesores", "Catálogo", "Enlaces comerciales", "Canal de consulta", "Imagen institucional"],
-    why: "Mejora la presencia comercial y evita respuestas repetidas sobre información básica, asesores, catálogo y rutas de contacto.",
+    id: "paginaei",
+    tag: "Información comercial",
+    name: "Página general de Electro Ingeniería",
+    analyst: "Analista por definir",
+    weight: 7,
+    buildMarket: 5500000,
+    eiBuild: 2134000,
+    summary: "Presenta información general, enlaces a asesores, catálogo y canal de consulta. El valor se controla como construcción liviana, no como plataforma empresarial pesada.",
+    verdict: "EI obtiene presencia ordenada con un costo interno controlado.",
+    impacts: ["Menos solicitudes repetidas por información comercial", "Acceso directo a asesores y catálogo", "Mejor presentación institucional", "Punto de consulta simple para clientes y equipo"],
     competitors: [
-      { name: "Desarrollo web base", plan: "Valor único solicitado $2.134.000", monthlyCop: Math.round(userPlanValue / 12), basis: "Construcción mensualizada a 12 meses", source: "Valor definido para el modelo interno" },
-      { name: "Webflow", plan: "CMS/Premium USD 25/mes", monthlyCop: usd(25), basis: "Sitio administrable con hosting", source: "https://webflow.com/pricing" },
-      { name: "Wix Business", plan: "Referencia USD 39/mes", monthlyCop: usd(39), basis: "Sitio empresarial con herramientas comerciales", source: "https://www.wix.com/plans" }
+      {name:"Wix Business Elite", usd:159, type:"flat", source:"https://www.wix.com/plans"},
+      {name:"Webflow Business", usd:39, type:"flat", source:"https://webflow.com/pricing"},
+      {name:"Squarespace Business", usd:23, type:"flat", source:"https://www.squarespace.com/pricing"}
     ]
   }
 ];
-
-const stateKey = "eiDashboardAnalystsV1";
-let valueChart;
-let roiChart;
-let filteredApps = [...apps];
-
-const peso = value => new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(value || 0);
-const number = value => new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 }).format(value || 0);
-const ratio = value => `${(value || 0).toFixed(2)}x`;
-const byId = id => document.getElementById(id);
-
-function loadStoredData() {
-  const saved = JSON.parse(localStorage.getItem(stateKey) || "{}");
-  apps.forEach(app => {
-    if (saved[app.id]) {
-      app.analyst = saved[app.id].analyst || app.analyst;
-      app.salary = Number(saved[app.id].salary) || app.salary;
-      app.dedication = Number(saved[app.id].dedication) || app.dedication;
+const fmt = new Intl.NumberFormat("es-CO", {style:"currency", currency:"COP", maximumFractionDigits:0});
+const pct = new Intl.NumberFormat("es-CO", {maximumFractionDigits:1});
+const $ = id => document.getElementById(id);
+function loadLocal(){
+  const saved = localStorage.getItem("eiDashboardV3");
+  if(!saved) return;
+  try{
+    const data = JSON.parse(saved);
+    state.globalUsers = data.globalUsers ?? state.globalUsers;
+    state.analystCount = data.analystCount ?? state.analystCount;
+    state.baseSalary = data.baseSalary ?? state.baseSalary;
+    if(Array.isArray(data.apps)){
+      data.apps.forEach(item=>{
+        const app = apps.find(x=>x.id===item.id);
+        if(app){
+          app.analyst = item.analyst ?? app.analyst;
+          app.weight = item.weight ?? app.weight;
+          app.buildMarket = item.buildMarket ?? app.buildMarket;
+          app.salary = item.salary ?? app.salary;
+        }
+      });
     }
-  });
+  }catch(e){}
 }
-
-function saveStoredData() {
-  const payload = {};
-  apps.forEach(app => {
-    payload[app.id] = { analyst: app.analyst, salary: app.salary, dedication: app.dedication };
-  });
-  localStorage.setItem(stateKey, JSON.stringify(payload));
-}
-
-function metrics(app) {
-  const cost = app.salary * (app.dedication / 100);
-  const monthlyValue = app.marketMonthly + app.operatingSavings + app.maintenanceAvoided;
-  return {
-    cost,
-    monthlyValue,
-    net: monthlyValue - cost,
-    roi: cost > 0 ? monthlyValue / cost : 0,
-    annualValue: monthlyValue * 12,
-    annualCost: cost * 12,
-    annualNet: (monthlyValue - cost) * 12
-  };
-}
-
-function totals() {
-  return apps.reduce((acc, app) => {
-    const m = metrics(app);
-    acc.value += m.annualValue;
-    acc.cost += m.annualCost;
-    acc.net += m.annualNet;
-    acc.market += app.marketMonthly * 12;
-    acc.operating += app.operatingSavings * 12;
-    acc.maintenance += app.maintenanceAvoided * 12;
-    return acc;
-  }, { value: 0, cost: 0, net: 0, market: 0, operating: 0, maintenance: 0 });
-}
-
-function updateKpis() {
-  const t = totals();
-  byId("kpiAnnualValue").textContent = peso(t.value);
-  byId("kpiAnnualCost").textContent = peso(t.cost);
-  byId("kpiNetAnnual").textContent = peso(t.net);
-  byId("kpiRoi").textContent = ratio(t.value / t.cost);
-  byId("kpiTrm").textContent = `$${number(TRM)}`;
-}
-
-function rowTemplate(app) {
-  const m = metrics(app);
-  return `
-    <tr data-id="${app.id}">
-      <td class="app-name"><strong>${app.name}</strong><span>${app.type}</span></td>
-      <td><input class="edit-input analyst-input" value="${app.analyst}" data-id="${app.id}"></td>
-      <td><input class="edit-input salary-input" type="number" min="0" step="50000" value="${Math.round(app.salary)}" data-id="${app.id}"></td>
-      <td><input class="edit-input dedication-input" type="number" min="1" max="100" step="1" value="${Math.round(app.dedication)}" data-id="${app.id}"></td>
-      <td class="money">${peso(app.marketMonthly)}</td>
-      <td class="money">${peso(app.operatingSavings)}</td>
-      <td class="money">${peso(m.cost)}</td>
-      <td><span class="net-pill">${peso(m.net)}</span></td>
-      <td><span class="roi-pill">${ratio(m.roi)}</span></td>
-      <td><button class="detail-btn" data-id="${app.id}"><i class="fa-solid fa-eye"></i> Ver</button></td>
-    </tr>
-  `;
-}
-
-function renderTable() {
-  byId("appsTableBody").innerHTML = filteredApps.map(rowTemplate).join("");
-  document.querySelectorAll(".analyst-input").forEach(input => input.addEventListener("input", handleEdit));
-  document.querySelectorAll(".salary-input").forEach(input => input.addEventListener("input", handleEdit));
-  document.querySelectorAll(".dedication-input").forEach(input => input.addEventListener("input", handleEdit));
-  document.querySelectorAll(".detail-btn").forEach(button => button.addEventListener("click", () => openModal(button.dataset.id)));
-}
-
-function handleEdit(event) {
-  const id = event.target.dataset.id;
-  const app = apps.find(item => item.id === id);
-  if (!app) return;
-  if (event.target.classList.contains("analyst-input")) app.analyst = event.target.value;
-  if (event.target.classList.contains("salary-input")) app.salary = Number(event.target.value || 0);
-  if (event.target.classList.contains("dedication-input")) app.dedication = Number(event.target.value || 0);
-  saveStoredData();
-  applySearch(false);
-  updateAll(false);
-}
-
-function renderCards() {
-  byId("appCards").innerHTML = apps.map(app => {
-    const m = metrics(app);
-    return `
-      <article class="app-card" data-id="${app.id}">
-        <div class="card-icon"><i class="fa-solid ${app.icon}"></i></div>
-        <h3>${app.name}</h3>
-        <p>${app.why}</p>
-        <div class="card-stats">
-          <div><span>Valor mensual</span><strong>${peso(m.monthlyValue)}</strong></div>
-          <div><span>Retorno</span><strong>${ratio(m.roi)}</strong></div>
-          <div><span>Mercado mensual</span><strong>${peso(app.marketMonthly)}</strong></div>
-          <div><span>Costo imputado</span><strong>${peso(m.cost)}</strong></div>
-        </div>
-      </article>
-    `;
-  }).join("");
-  document.querySelectorAll(".app-card").forEach(card => card.addEventListener("click", () => openModal(card.dataset.id)));
-}
-
-function renderSelector() {
-  byId("appSelector").innerHTML = apps.map(app => `<option value="${app.id}">${app.name}</option>`).join("");
-  byId("appSelector").addEventListener("change", event => renderCompetitors(event.target.value));
-  renderCompetitors(apps[0].id);
-}
-
-function renderCompetitors(appId) {
-  const app = apps.find(item => item.id === appId) || apps[0];
-  byId("competitorCards").innerHTML = app.competitors.map((competitor, index) => `
-    <article class="competitor-card" data-rank="0${index + 1}">
-      <h3>${competitor.name}</h3>
-      <div class="price">${peso(competitor.monthlyCop)}</div>
-      <p><strong>${competitor.plan}</strong></p>
-      <p>${competitor.basis}</p>
-      ${competitor.source.startsWith("http") ? `<a href="${competitor.source}" target="_blank" rel="noopener">Ver referencia</a>` : `<span>${competitor.source}</span>`}
-    </article>
-  `).join("");
-}
-
-function renderSources() {
-  const unique = new Map();
-  unique.set("TRM Colombia", "https://www.trmhoy.co/");
-  apps.forEach(app => app.competitors.forEach(competitor => {
-    if (competitor.source.startsWith("http")) unique.set(competitor.name, competitor.source);
+function saveLocal(){
+  localStorage.setItem("eiDashboardV3", JSON.stringify({
+    globalUsers: state.globalUsers,
+    analystCount: state.analystCount,
+    baseSalary: state.baseSalary,
+    apps: apps.map(a=>({id:a.id, analyst:a.analyst, weight:a.weight, buildMarket:a.buildMarket, salary:a.salary}))
   }));
-  byId("sourcesList").innerHTML = Array.from(unique.entries()).map(([name, url]) => `<a class="source-item" href="${url}" target="_blank" rel="noopener">${name}<span>${url}</span></a>`).join("");
 }
-
-function initCharts() {
-  const valueCtx = byId("valueChart");
-  const roiCtx = byId("roiChart");
-  valueChart = new Chart(valueCtx, {
-    type: "bar",
-    data: chartValueData(),
-    options: {
-      responsive: true,
-      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => peso(ctx.raw) } } },
-      scales: { y: { ticks: { callback: value => `${Math.round(value / 1000000)}M` } }, x: { ticks: { maxRotation: 45, minRotation: 0 } } }
-    }
-  });
-  roiChart = new Chart(roiCtx, {
-    type: "bar",
-    data: chartRoiData(),
-    options: {
-      responsive: true,
-      plugins: { legend: { position: "bottom" }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.dataset.label.includes("Retorno") ? ratio(ctx.raw) : peso(ctx.raw)}` } } },
-      scales: { y: { beginAtZero: true }, x: { ticks: { maxRotation: 45, minRotation: 0 } } }
-    }
-  });
+function users(){return Math.max(1, Number($("globalUsers").value || state.globalUsers));}
+function analystCount(){return Math.max(1, Number($("analystCount").value || state.analystCount));}
+function salaryFor(app){return Math.max(0, Number(app.salary || $("baseSalary").value || state.baseSalary));}
+function competitorMonthlyCop(comp, totalUsers){
+  const usd = comp.type === "per_user" ? comp.usd * totalUsers : comp.usd;
+  return usd * TRM;
 }
-
-function chartValueData() {
+function appCalc(app){
+  const totalUsers = users();
+  const salary = salaryFor(app);
+  const teamMonthly = salary * analystCount();
+  const eiMonthly = teamMonthly * (Number(app.weight) / 100);
+  const compMonthly = app.competitors.map(c => competitorMonthlyCop(c, totalUsers));
+  const avgMarketLicense = compMonthly.reduce((a,b)=>a+b,0) / compMonthly.length;
+  const buildMonthly = Number(app.buildMarket) / 12;
+  const marketMonthly = avgMarketLicense + buildMonthly;
+  const savingMonthly = marketMonthly - eiMonthly;
+  const marketAnnual = marketMonthly * 12;
+  const eiAnnual = eiMonthly * 12;
+  const savingAnnual = savingMonthly * 12;
+  const roi = marketMonthly / Math.max(1, eiMonthly);
+  return {totalUsers,salary,teamMonthly,eiMonthly,compMonthly,avgMarketLicense,buildMonthly,marketMonthly,savingMonthly,marketAnnual,eiAnnual,savingAnnual,roi};
+}
+function totals(){
+  const list = apps.map(appCalc);
   return {
-    labels: apps.map(app => shortName(app.name)),
-    datasets: [{
-      label: "Valor mensual",
-      data: apps.map(app => metrics(app).monthlyValue),
-      backgroundColor: apps.map((_, i) => i % 2 === 0 ? "rgba(6,43,85,.82)" : "rgba(242,201,76,.82)"),
-      borderRadius: 14
-    }]
+    marketAnnual: list.reduce((a,b)=>a+b.marketAnnual,0),
+    eiAnnual: list.reduce((a,b)=>a+b.eiAnnual,0),
+    savingAnnual: list.reduce((a,b)=>a+b.savingAnnual,0),
+    marketMonthly: list.reduce((a,b)=>a+b.marketMonthly,0),
+    eiMonthly: list.reduce((a,b)=>a+b.eiMonthly,0),
+    buildMarket: apps.reduce((a,b)=>a+Number(b.buildMarket),0)
   };
 }
-
-function chartRoiData() {
-  return {
-    labels: apps.map(app => shortName(app.name)),
-    datasets: [
-      { label: "Valor mensual", data: apps.map(app => metrics(app).monthlyValue), backgroundColor: "rgba(6,43,85,.78)", borderRadius: 14 },
-      { label: "Costo imputado", data: apps.map(app => metrics(app).cost), backgroundColor: "rgba(242,201,76,.78)", borderRadius: 14 }
-    ]
-  };
+function renderNav(){
+  $("appNav").innerHTML = apps.map((a,i)=>`<button class="${i===state.active?"active":""}" data-app="${i}"><b>${i+1}. ${a.name}</b><span>${a.tag}</span></button>`).join("");
+  document.querySelectorAll("[data-app]").forEach(btn=>btn.addEventListener("click",()=>{state.active=Number(btn.dataset.app);renderAll()}));
 }
-
-function updateCharts() {
-  if (!valueChart || !roiChart) return;
-  valueChart.data = chartValueData();
-  roiChart.data = chartRoiData();
-  valueChart.update();
-  roiChart.update();
+function renderKpis(){
+  const t = totals();
+  const ratio = t.marketAnnual / Math.max(1,t.eiAnnual);
+  $("kpiStrip").innerHTML = [
+    ["Usuarios usados", `${users()} usuarios`, "Base de comparación"],
+    ["Costo EI anual", fmt.format(t.eiAnnual), "Sueldos imputados"],
+    ["Mercado anual equivalente", fmt.format(t.marketAnnual), "Licencia + creación"],
+    ["Ahorro anual neto", fmt.format(t.savingAnnual), "Costo evitado"],
+    ["Retorno general", `${pct.format(ratio)}x`, "Frente a sueldos"]
+  ].map(k=>`<article class="kpi"><span>${k[0]}</span><strong>${k[1]}</strong><small>${k[2]}</small></article>`).join("");
 }
-
-function shortName(name) {
-  return name.replace("ERP ", "").replace("APP ", "").replace("Página ", "Pág. ").replace("trazabilidad logística", "logística").replace("procesos logísticos", "auditoría");
+function renderFocus(){
+  const app = apps[state.active];
+  const c = appCalc(app);
+  $("appTag").textContent = app.tag;
+  $("appTitle").textContent = app.name;
+  $("appSummary").textContent = app.summary;
+  $("appVerdict").textContent = app.verdict;
+  $("appMiniKpis").innerHTML = [
+    ["Mercado mensual", fmt.format(c.marketMonthly)],
+    ["Costo EI mensual", fmt.format(c.eiMonthly)],
+    ["Ahorro mensual", fmt.format(c.savingMonthly)],
+    ["Retorno", `${pct.format(c.roi)}x`]
+  ].map(x=>`<div class="mini"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("");
+  $("appFormula").textContent = `Promedio top 3 con ${c.totalUsers} usuarios (${fmt.format(c.avgMarketLicense)}) + creación prorrateada (${fmt.format(c.buildMonthly)}) - costo EI por sueldo y peso asignado (${fmt.format(c.eiMonthly)}).`;
+  const buildEi = app.eiBuild ? fmt.format(app.eiBuild) : fmt.format(c.eiAnnual);
+  $("comparisonRows").innerHTML = [
+    ["Licencia mensual 20 usuarios", fmt.format(c.avgMarketLicense), "Incluido en desarrollo interno", fmt.format(c.avgMarketLicense)],
+    ["Creación, ajuste y puesta en marcha", fmt.format(app.buildMarket), buildEi, fmt.format(Math.max(0, app.buildMarket - (app.eiBuild || 0)))],
+    ["Mensual equivalente", fmt.format(c.marketMonthly), fmt.format(c.eiMonthly), fmt.format(c.savingMonthly)],
+    ["Primer año completo", fmt.format(c.marketAnnual), fmt.format(c.eiAnnual), fmt.format(c.savingAnnual)]
+  ].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="positive">${r[3]}</td></tr>`).join("");
+  renderCharts(app,c);
 }
-
-function openModal(appId) {
-  const app = apps.find(item => item.id === appId);
-  if (!app) return;
-  const m = metrics(app);
-  byId("modalContent").innerHTML = `
-    <h2 class="modal-title">${app.name}</h2>
-    <p class="modal-subtitle">${app.why}</p>
-    <div class="modal-grid">
-      <div class="modal-box">
-        <h4>Valor económico mensual</h4>
-        <div class="big">${peso(m.monthlyValue)}</div>
-        <p>Mercado: ${peso(app.marketMonthly)} · Ahorro operativo: ${peso(app.operatingSavings)} · Mantenimiento evitado: ${peso(app.maintenanceAvoided)}</p>
-      </div>
-      <div class="modal-box">
-        <h4>Comparación con analista</h4>
-        <div class="big">${ratio(m.roi)}</div>
-        <p>${app.analyst} · sueldo ${peso(app.salary)} · dedicación ${app.dedication}% · costo imputado ${peso(m.cost)}</p>
-      </div>
-      <div class="modal-box">
-        <h4>Funcionalidades creadas</h4>
-        <ul>${app.features.map(item => `<li>${item}</li>`).join("")}</ul>
-      </div>
-      <div class="modal-box">
-        <h4>Top 3 de mercado</h4>
-        <ul>${app.competitors.map(item => `<li><strong>${item.name}</strong>: ${item.plan} · ${peso(item.monthlyCop)}</li>`).join("")}</ul>
-      </div>
-    </div>
-  `;
-  byId("detailModal").classList.add("open");
+function compactMoney(value){
+  if(value >= 1000000) return `$${(value/1000000).toFixed(1).replace(".",",")} M`;
+  if(value >= 1000) return `$${Math.round(value/1000)} mil`;
+  return fmt.format(value);
 }
-
-function closeModal() {
-  byId("detailModal").classList.remove("open");
+function renderCharts(app,c){
+  const values = app.competitors.map((x,i)=>c.compMonthly[i] + c.buildMonthly);
+  const max = Math.max(...values, c.eiMonthly) * 1.12;
+  $("competitorChart").innerHTML = `<div class="bar-stage"><div class="bars">${app.competitors.map((x,i)=>{
+    const marketH = Math.max(8, (values[i] / max) * 100);
+    const eiH = Math.max(8, (c.eiMonthly / max) * 100);
+    return `<div class="bar-pair"><div class="bar-col bar-market" style="height:${marketH}%"><span>${compactMoney(values[i])}</span></div><div class="bar-col bar-ei" style="height:${eiH}%"><span>${compactMoney(c.eiMonthly)}</span></div></div>`;
+  }).join("")}</div><div class="bar-labels">${app.competitors.map(x=>`<div>${x.name}</div>`).join("")}</div><div class="legend-inline"><span><i class="legend-market"></i>Competencia</span><span><i class="legend-ei"></i>EI</span></div></div>`;
+  const a = c.avgMarketLicense;
+  const b = c.buildMonthly;
+  const d = c.eiMonthly;
+  const total = a + b + d;
+  const pa = (a/total)*360;
+  const pb = (b/total)*360;
+  const pc = 360 - pa - pb;
+  const gradient = `conic-gradient(#4ea0ff 0 ${pa}deg,#45d69a ${pa}deg ${pa+pb}deg,#f6c85f ${pa+pb}deg ${pa+pb+pc}deg)`;
+  $("compositionChart").innerHTML = `<div class="donut-wrap"><div class="donut" style="background:${gradient}"><div class="donut-core"><div><b>${pct.format(c.roi)}x</b><span>retorno</span></div></div></div><div class="donut-list"><div><i class="dot" style="background:#4ea0ff"></i><span>Licencia evitada</span><b>${compactMoney(a)}</b></div><div><i class="dot" style="background:#45d69a"></i><span>Creación prorrateada</span><b>${compactMoney(b)}</b></div><div><i class="dot" style="background:#f6c85f"></i><span>Costo EI</span><b>${compactMoney(d)}</b></div></div></div>`;
 }
-
-function applySearch(shouldRender = true) {
-  const q = byId("searchInput").value.trim().toLowerCase();
-  filteredApps = apps.filter(app => `${app.name} ${app.type} ${app.features.join(" ")}`.toLowerCase().includes(q));
-  if (shouldRender) renderTable();
+function renderDetail(){
+  const app = apps[state.active];
+  const c = appCalc(app);
+  $("detailTitle").textContent = app.name;
+  $("editAnalyst").value = app.analyst;
+  $("editSalary").value = salaryFor(app);
+  $("editWeight").value = app.weight;
+  $("editBuild").value = app.buildMarket;
+  $("competitorList").innerHTML = app.competitors.map((x,i)=>{
+    const monthly = c.compMonthly[i];
+    const total = monthly + c.buildMonthly;
+    const basis = x.type === "per_user" ? `${x.usd} USD × ${c.totalUsers} usuarios` : `${x.usd} USD mensual`;
+    return `<div class="comp-row"><div><b>${x.name}</b><span>${basis} + creación prorrateada</span></div><strong>${fmt.format(total)}</strong></div>`;
+  }).join("");
+  $("impactList").innerHTML = app.impacts.map(x=>`<li>${x}</li>`).join("");
+  $("sourceList").innerHTML = app.competitors.map(x=>`<a href="${x.source}" target="_blank" rel="noopener">${x.name}: ${x.source}</a>`).join("");
 }
-
-function updateAll(show = true) {
-  updateKpis();
-  renderTable();
-  renderCards();
-  updateCharts();
-  if (show) showToast();
+function bind(){
+  ["globalUsers","analystCount","baseSalary"].forEach(id=>{
+    $(id).addEventListener("input",()=>{
+      state[id] = Number($(id).value);
+      saveLocal();
+      renderAll();
+    });
+  });
+  $("prevApp").addEventListener("click",()=>{state.active = (state.active - 1 + apps.length) % apps.length;renderAll()});
+  $("nextApp").addEventListener("click",()=>{state.active = (state.active + 1) % apps.length;renderAll()});
+  $("openDetail").addEventListener("click",()=>{renderDetail();$("detailDialog").showModal()});
+  $("closeDetail").addEventListener("click",()=>$("detailDialog").close());
+  $("openMethod").addEventListener("click",()=>$("methodDialog").showModal());
+  $("closeMethod").addEventListener("click",()=>$("methodDialog").close());
+  $("editAnalyst").addEventListener("input",e=>{apps[state.active].analyst=e.target.value;saveLocal()});
+  $("editSalary").addEventListener("input",e=>{apps[state.active].salary=Number(e.target.value);saveLocal();renderAll();renderDetail()});
+  $("editWeight").addEventListener("input",e=>{apps[state.active].weight=Number(e.target.value);saveLocal();renderAll();renderDetail()});
+  $("editBuild").addEventListener("input",e=>{apps[state.active].buildMarket=Number(e.target.value);saveLocal();renderAll();renderDetail()});
+  window.addEventListener("keydown",e=>{
+    if(e.key === "ArrowRight"){state.active = (state.active + 1) % apps.length;renderAll()}
+    if(e.key === "ArrowLeft"){state.active = (state.active - 1 + apps.length) % apps.length;renderAll()}
+  });
 }
-
-function showToast() {
-  const toast = byId("toast");
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 1800);
+function renderAll(){
+  $("globalUsers").value = state.globalUsers;
+  $("analystCount").value = state.analystCount;
+  $("baseSalary").value = state.baseSalary;
+  renderNav();
+  renderKpis();
+  renderFocus();
 }
-
-function startAnimations() {
-  if (window.anime) {
-    anime({ targets: ".panel-glass, .insight-strip div, .app-card", translateY: [18, 0], opacity: [0, 1], delay: anime.stagger(55), duration: 650, easing: "easeOutExpo" });
-  }
-}
-
-function boot() {
-  loadStoredData();
-  renderSelector();
-  renderSources();
-  updateKpis();
-  renderTable();
-  renderCards();
-  initCharts();
-  startAnimations();
-  byId("searchInput").addEventListener("input", () => { applySearch(); });
-  byId("refreshModel").addEventListener("click", () => updateAll(true));
-  byId("printBoard").addEventListener("click", () => window.print());
-  byId("closeModal").addEventListener("click", closeModal);
-  byId("detailModal").addEventListener("click", event => { if (event.target.id === "detailModal") closeModal(); });
-  byId("enterDashboard").addEventListener("click", () => byId("splash").classList.add("hide"));
-  setTimeout(() => byId("splash").classList.add("hide"), 2200);
-}
-
-document.addEventListener("DOMContentLoaded", boot);
+loadLocal();
+bind();
+renderAll();
+setTimeout(()=>$("splash").classList.add("hide"),650);
