@@ -10,131 +10,115 @@
 <body>
   <div class="splash" id="splash">
     <div class="splash-card">
-      <div class="ei-mark">EI</div>
+      <div class="splash-mark">EI</div>
       <strong>Portafolio digital interno</strong>
-      <span>Ahorro, mercado, tiempos y valor operativo</span>
+      <span>Valor económico, ahorro operativo y comparación frente al mercado</span>
     </div>
   </div>
 
-  <main class="page-shell">
+  <main class="shell">
     <header class="topbar">
       <section class="brand">
-        <div class="brand-icon">EI</div>
-        <div>
+        <div class="brand-mark">EI</div>
+        <div class="brand-copy">
           <strong>Electro Ingeniería · Portafolio digital</strong>
-          <span>Comparación contra mercado, ahorro operativo y valor por analista</span>
+          <span>Landing de valoración ejecutiva</span>
         </div>
       </section>
-      <nav class="main-nav" aria-label="Navegación principal">
+      <nav class="nav" aria-label="Navegación principal">
         <button class="nav-btn active" data-view="inicio">Resumen</button>
         <button class="nav-btn" data-view="analistas">Analistas</button>
         <button class="nav-btn" data-view="apps">Apps</button>
-        <button class="nav-btn ghost" data-modal="metodo">Método</button>
+        <button class="nav-btn light" data-modal="metodo">Método</button>
       </nav>
     </header>
 
     <section class="view active" id="view-inicio">
-      <div class="hero-grid">
-        <article class="hero-panel card">
-          <span class="eyebrow">lectura ejecutiva</span>
-          <h1>Tener el equipo interno es más rentable que comprar las soluciones por separado.</h1>
-          <p>El tablero separa tres conceptos: costo de mercado, costo interno por analista y ahorro operativo por tiempos, papel, tinta, correos, reportes y trazabilidad.</p>
+      <div class="hero">
+        <article class="hero-card card accent-blue">
+          <span class="eyebrow">lectura central</span>
+          <h1>El equipo interno entrega un portafolio que costaría mucho más si se comprara por separado.</h1>
+          <p>La comparación separa mercado, valor interno razonable del desarrollo, horas ahorradas, reprocesos, papel, tinta, informes y consulta en tiempo real.</p>
           <div class="hero-actions">
-            <button class="primary" data-view-go="apps">Ver app por app</button>
-            <button class="secondary" data-modal="metodo">Ver fórmula</button>
+            <button class="primary" data-view-go="apps">Explorar aplicación</button>
+            <button class="secondary" data-view-go="analistas">Ver por analista</button>
           </div>
         </article>
-        <aside class="summary-stack">
-          <article class="metric-card card">
-            <span>Mercado mensual equivalente</span>
-            <b id="totalMarket">$0</b>
-            <small>Licencias promedio + creación externa prorrateada</small>
-          </article>
-          <article class="metric-card card blue">
-            <span>Costo mensual analistas</span>
-            <b id="totalSalary">$0</b>
-            <small>3 analistas × $2.100.000</small>
-          </article>
-          <article class="metric-card card green">
-            <span>Ahorro mensual neto</span>
-            <b id="totalNet">$0</b>
-            <small>Mercado + ahorro operativo - salarios</small>
-          </article>
-        </aside>
+        <aside class="metrics-grid" id="summaryCards"></aside>
       </div>
 
-      <div class="overview-grid">
-        <article class="card chart-card wide">
-          <div class="section-head compact">
+      <div class="dashboard-row">
+        <article class="card chart-card big-chart-card">
+          <div class="section-head small">
             <div>
-              <span class="eyebrow">comparación general</span>
-              <h2>Ahorro mensual por aplicación</h2>
+              <span class="eyebrow">comparación ejecutiva</span>
+              <h2>Ahorro mensual por app</h2>
             </div>
-            <button class="mini-btn" data-view-go="apps">Explorar</button>
+            <button class="mini-btn" data-view-go="apps">Detalle</button>
           </div>
-          <div class="chart-wrap large"><canvas id="appSavingsChart"></canvas></div>
+          <div class="chart-wrap hero-chart"><canvas id="overviewChart"></canvas></div>
         </article>
-        <article class="card chart-card">
-          <div class="section-head compact">
+        <article class="card chart-card side-chart-card">
+          <div class="section-head small">
             <div>
               <span class="eyebrow">responsables</span>
               <h2>Ahorro por analista</h2>
             </div>
           </div>
-          <div class="chart-wrap"><canvas id="analystChart"></canvas></div>
+          <div class="chart-wrap side-chart"><canvas id="analystOverviewChart"></canvas></div>
         </article>
       </div>
     </section>
 
     <section class="view" id="view-analistas">
-      <div class="section-head">
+      <div class="section-head tight">
         <div>
-          <span class="eyebrow">rentabilidad por responsable</span>
-          <h2>Cada salario cubre varias soluciones internas</h2>
+          <span class="eyebrow">responsables</span>
+          <h2>Valor generado por cada salario base</h2>
         </div>
-        <p>El sueldo mensual del analista se compara contra el costo que tendría comprar las apps que tiene a cargo.</p>
+        <p>El salario mensual es de $2.100.000 por analista. El valor EI se calcula según el peso económico de las aplicaciones bajo su responsabilidad.</p>
       </div>
-      <div class="analyst-board" id="analystBoard"></div>
+      <div class="analyst-grid" id="analystBoard"></div>
     </section>
 
     <section class="view" id="view-apps">
-      <div class="app-layout">
-        <aside class="app-menu card">
-          <div class="menu-head">
+      <div class="apps-layout">
+        <aside class="app-selector card">
+          <div class="selector-head">
             <span class="eyebrow">portafolio</span>
-            <h2>Apps</h2>
+            <h2>Aplicaciones</h2>
           </div>
           <div class="app-list" id="appList"></div>
         </aside>
 
-        <article class="app-focus card">
-          <div class="app-top">
+        <article class="app-panel card">
+          <header class="app-header">
             <div class="title-block">
-              <span class="eyebrow" id="activeOwner">Analista</span>
-              <h2 id="activeTitle">Aplicación</h2>
-              <p id="activePurpose">Descripción</p>
+              <span class="eyebrow" id="appOwner">Analista</span>
+              <h2 id="appTitle">Aplicación</h2>
+              <p id="appPurpose">Descripción</p>
             </div>
-            <div class="focus-controls">
+            <div class="app-controls">
               <button class="round" id="prevApp" aria-label="Aplicación anterior">‹</button>
               <button class="round" id="nextApp" aria-label="Aplicación siguiente">›</button>
             </div>
-          </div>
+          </header>
 
-          <div class="focus-grid">
-            <section class="main-visual">
-              <div class="chart-title">
-                <span>comparación de valor</span>
-                <strong id="activeUsers">0 usuarios</strong>
+          <div class="app-content">
+            <section class="app-chart-zone">
+              <div class="chart-caption">
+                <span>valor mensual comparado</span>
+                <strong id="appUsers">0 usuarios</strong>
               </div>
-              <div class="chart-wrap app-chart"><canvas id="activeAppChart"></canvas></div>
+              <div class="chart-wrap app-main-chart"><canvas id="appChart"></canvas></div>
             </section>
 
-            <aside class="focus-side">
-              <div class="kpi-grid" id="activeKpis"></div>
-              <div class="mini-explain" id="activeReason"></div>
-              <div class="focus-actions">
-                <button class="primary" data-modal="detalle">Detalle de la app</button>
-                <button class="secondary" data-modal="competencia">Top 3 competencia</button>
+            <aside class="app-summary">
+              <div class="kpi-grid" id="appKpis"></div>
+              <div class="reason-box" id="appReason"></div>
+              <div class="action-grid">
+                <button class="primary" data-modal="detalle">Ficha económica</button>
+                <button class="secondary" data-modal="competencia">Competencia</button>
                 <button class="secondary" data-modal="ahorro">Ahorro operativo</button>
               </div>
             </aside>
@@ -161,8 +145,8 @@
     <div class="modal-card">
       <header class="modal-head">
         <div>
-          <span class="eyebrow">mercado</span>
-          <h3 id="competitionTitle">Top 3 competencias</h3>
+          <span class="eyebrow">top 3</span>
+          <h3 id="competitionTitle">Competencia</h3>
         </div>
         <button class="close" data-close>×</button>
       </header>
@@ -177,7 +161,7 @@
     <div class="modal-card">
       <header class="modal-head">
         <div>
-          <span class="eyebrow">tiempos, papel y reprocesos</span>
+          <span class="eyebrow">operación</span>
           <h3 id="savingTitle">Ahorro operativo</h3>
         </div>
         <button class="close" data-close>×</button>
@@ -193,8 +177,8 @@
     <div class="modal-card method-card">
       <header class="modal-head">
         <div>
-          <span class="eyebrow">base de cálculo</span>
-          <h3>Método de valoración</h3>
+          <span class="eyebrow">fórmulas</span>
+          <h3>Método de cálculo</h3>
         </div>
         <button class="close" data-close>×</button>
       </header>
