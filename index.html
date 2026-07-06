@@ -7,126 +7,135 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="intro" class="intro">
-    <div class="intro-card">
-      <span></span>
-      <strong>Electro Ingeniería</strong>
-      <p>Portafolio digital interno</p>
+  <div id="splash" class="splash">
+    <div class="splash-card">
+      <div class="splash-mark">EI</div>
+      <strong>Portafolio digital interno</strong>
+      <span>Valor económico, ahorro operativo y comparación de mercado</span>
     </div>
   </div>
 
-  <main class="page">
+  <main class="shell">
     <header class="topbar">
-      <div class="brand">
+      <section class="brand-block">
         <div class="brand-mark">EI</div>
-        <div>
+        <div class="brand-copy">
           <strong>Valor económico del portafolio digital</strong>
-          <small>Comparación de mercado para 20 usuarios · primer año equivalente</small>
+          <span>20 usuarios · 3 analistas · costos ponderados por mercado</span>
         </div>
-      </div>
-      <nav class="nav-actions">
-        <button data-panel="resumen" class="nav-btn active">Resumen</button>
-        <button data-panel="analistas" class="nav-btn">Analistas</button>
-        <button data-panel="apps" class="nav-btn">Apps</button>
-        <button id="openMethod" class="ghost-btn">Método</button>
+      </section>
+      <nav class="top-actions" aria-label="Navegación principal">
+        <button class="nav-btn active" data-view="inicio">Inicio</button>
+        <button class="nav-btn" data-view="analistas">Analistas</button>
+        <button class="nav-btn" data-view="apps">Apps</button>
+        <button class="line-btn" id="methodBtn">Método</button>
       </nav>
     </header>
 
-    <section id="panel-resumen" class="panel active">
-      <div class="summary-grid">
-        <article class="story-card">
-          <span class="eyebrow">Lectura para exposición</span>
-          <h1>El equipo interno sostiene un portafolio que en el mercado exige licencias, configuración y personalización por separado.</h1>
-          <p>La comparación no toma solo la mensualidad de un software. Suma el uso para 20 usuarios y la creación o parametrización que normalmente se cobra al implementar una solución equivalente.</p>
-          <div class="story-actions">
-            <button id="goApps" class="primary-btn">Explorar app por app</button>
-            <button id="goAnalysts" class="ghost-btn">Ver ahorro por analista</button>
+    <section id="view-inicio" class="view active">
+      <div class="hero-grid">
+        <article class="hero-card">
+          <span class="tag">Lectura ejecutiva</span>
+          <h1>La empresa evita comprar, adaptar y sostener nueve soluciones externas porque el equipo interno cubre el portafolio con conocimiento propio.</h1>
+          <p>El tablero compara el costo mensual de mercado, el salario ponderado de los analistas y el ahorro operativo por tiempo, papel, reprocesos e información en tiempo real.</p>
+          <div class="hero-actions">
+            <button class="primary" id="startApps">Explorar app por app</button>
+            <button class="secondary" id="startAnalysts">Ver por analista</button>
           </div>
         </article>
-        <article class="main-metric-card">
-          <span>Ahorro mensual estimado</span>
-          <strong id="mainSaving">$0</strong>
-          <p id="mainSavingText">Mercado completo menos costo EI interno.</p>
-          <div class="metric-strip" id="metricStrip"></div>
+        <article class="total-card">
+          <div class="total-head">
+            <span>Ahorro mensual total</span>
+            <button class="mini" id="totalsBtn">Ver detalle</button>
+          </div>
+          <strong id="totalSaving">$0</strong>
+          <p id="totalSavingNote">Mercado evitado + ahorro operativo - costo interno EI.</p>
+          <div id="totalTiles" class="total-tiles"></div>
         </article>
       </div>
 
-      <div class="visual-row">
-        <article class="chart-card big">
-          <div class="card-head">
+      <div class="overview-grid">
+        <article class="chart-panel wide">
+          <div class="section-head compact">
             <div>
-              <span class="eyebrow">Comparación general</span>
-              <h2>Mercado vs equipo interno</h2>
+              <span class="tag">Panorama</span>
+              <h2>Comprar afuera vs sostener adentro</h2>
             </div>
-            <button id="openTotals" class="mini-btn">Detalle</button>
+            <span class="small-note">Valores mensuales</span>
           </div>
-          <div id="generalBars" class="general-bars"></div>
+          <div id="generalChart" class="comparison-chart"></div>
         </article>
-        <article class="chart-card compact">
-          <div class="card-head">
+        <article class="explain-panel">
+          <div class="section-head compact">
             <div>
-              <span class="eyebrow">Composición</span>
-              <h2>Qué se evita pagar</h2>
+              <span class="tag">Orden para exponer</span>
+              <h2>Guion de presentación</h2>
             </div>
           </div>
-          <div id="mixChart" class="mix-chart"></div>
+          <div class="script-steps">
+            <button data-script="mercado"><b>1</b><span>Qué costaría comprarlo</span></button>
+            <button data-script="analistas"><b>2</b><span>Quién lo sostiene internamente</span></button>
+            <button data-script="operacion"><b>3</b><span>Qué ahorra en la operación</span></button>
+            <button data-script="hito"><b>4</b><span>Por qué marca un hito</span></button>
+          </div>
         </article>
       </div>
     </section>
 
-    <section id="panel-analistas" class="panel">
-      <div class="panel-title">
+    <section id="view-analistas" class="view">
+      <div class="section-head">
         <div>
-          <span class="eyebrow">Rentabilidad por analista</span>
-          <h2>Un sueldo cubre varias soluciones internas</h2>
+          <span class="tag">Rentabilidad por persona</span>
+          <h2>El salario base se reparte entre las apps según el valor de mercado que reemplazan</h2>
         </div>
-        <p>Seleccione un analista para ver las aplicaciones a cargo y la diferencia frente al mercado.</p>
+        <p>Cada analista tiene un techo mensual de $2.100.000. Ese valor se distribuye entre sus aplicaciones por ponderación de mercado, sin superar su salario.</p>
       </div>
-      <div id="analystBoard" class="analyst-board"></div>
+      <div id="analystCards" class="analyst-grid"></div>
     </section>
 
-    <section id="panel-apps" class="panel">
-      <div class="app-layout">
-        <aside class="app-menu">
-          <div class="menu-title">
-            <span class="eyebrow">Portafolio</span>
-            <h2>Aplicaciones</h2>
+    <section id="view-apps" class="view">
+      <div class="app-shell">
+        <aside class="app-sidebar">
+          <div class="sidebar-head">
+            <span class="tag">Portafolio</span>
+            <h2>Apps</h2>
           </div>
-          <div id="appList" class="app-list"></div>
+          <div id="appGroups" class="app-groups"></div>
         </aside>
-        <article class="app-stage">
-          <div class="stage-top">
-            <div>
-              <span id="appOwner" class="eyebrow">Analista</span>
-              <h2 id="appTitle">Aplicación</h2>
-              <p id="appPurpose">Seleccione una app para iniciar.</p>
+        <article class="focus-card">
+          <div class="focus-head">
+            <div class="focus-title">
+              <span id="focusOwner" class="tag">Analista</span>
+              <h2 id="focusName">Aplicación</h2>
+              <p id="focusPurpose">Seleccione una aplicación.</p>
             </div>
-            <div class="stage-buttons">
-              <button id="prevApp" class="ghost-btn">Anterior</button>
-              <button id="nextApp" class="primary-btn">Siguiente</button>
+            <div class="focus-nav">
+              <button class="secondary small" id="prevApp">Anterior</button>
+              <button class="primary small" id="nextApp">Siguiente</button>
             </div>
           </div>
 
-          <div class="focus-grid">
-            <section class="focus-chart-card">
-              <div class="card-head tight">
+          <div class="focus-body">
+            <section class="focus-main-chart">
+              <div class="chart-title-row">
                 <div>
-                  <span class="eyebrow">Top 3 competencias</span>
-                  <h3>Valor mensual completo para 20 usuarios</h3>
+                  <span class="tag">Top 3 competencias</span>
+                  <h3>Mercado completo vs costo EI</h3>
                 </div>
-                <button id="openAppDetail" class="mini-btn">Ver detalle</button>
+                <button class="mini" id="competitorsBtn">Detalle</button>
               </div>
-              <div id="appBars" class="app-bars"></div>
+              <div id="appChart" class="app-chart"></div>
             </section>
-            <section class="focus-side">
-              <div class="mini-metrics" id="appMetrics"></div>
-              <div class="reason-box">
-                <span>Por qué gana EI</span>
-                <p id="appReason"></p>
+            <section class="focus-metrics">
+              <div id="appKpis" class="app-kpis"></div>
+              <div class="value-note">
+                <span>Lectura</span>
+                <p id="focusReason"></p>
               </div>
-              <div class="quick-row">
-                <button id="openCompetitors" class="ghost-btn">Competencias</button>
-                <button id="openEdit" class="ghost-btn">Editar datos</button>
+              <div class="focus-actions">
+                <button class="secondary" id="opsBtn">Ahorro operativo</button>
+                <button class="secondary" id="detailBtn">Ficha completa</button>
+                <button class="secondary" id="editBtn">Editar</button>
               </div>
             </section>
           </div>
@@ -136,14 +145,14 @@
   </main>
 
   <dialog id="modal" class="modal">
-    <div class="modal-box">
-      <div class="modal-head">
+    <div class="modal-card">
+      <header class="modal-head">
         <div>
-          <span id="modalEyebrow" class="eyebrow">Detalle</span>
-          <h3 id="modalTitle">Título</h3>
+          <span id="modalTag" class="tag">Detalle</span>
+          <h3 id="modalTitle">Detalle</h3>
         </div>
-        <button id="closeModal" class="close-btn">×</button>
-      </div>
+        <button id="closeModal" class="close" aria-label="Cerrar">×</button>
+      </header>
       <div id="modalBody" class="modal-body"></div>
     </div>
   </dialog>
